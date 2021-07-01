@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    margin-top: 0;
+    width: 50%;
+}
+
+html {
+    background-color: whitesmoke;
+}
+
+body {
+    background-color: rgb(79, 173, 228);
+}
+
+.lead-paragraph {
+    font-weight: bold;
+}

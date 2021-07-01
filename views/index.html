@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Interactive Map</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/leaflet.js"></script>
+
+</head>
+
+<body>
+
+    <div id="form">
+        <form action="search" method="post">
+            <input type="text" name="search" id="search" placeholder="Search country, region or territory">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <div id="mapid"></div>
+    <script src="js/map.js"></script>
+
+</body>
+
+</html>
