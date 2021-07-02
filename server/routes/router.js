@@ -14,7 +14,7 @@ route.get('/', services.homeRoutes);
 
 
 // API
-route.post('/api/country', controller.reverseGeocode);
+route.post('/api/nominatim', controller.nominatimReverseGeocode);
 
 
 module.exports = route;
