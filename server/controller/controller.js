@@ -39,7 +39,7 @@ exports.getCountryPolygon = (req, res) => {
         return;
     }
 
-    // TO-DO: MongoDB request (countryname -> polygon)
+    // TODO: MongoDB request (countryname -> polygon)
     if (req.query.countryName) {
         const countryName = req.query.countryName;
 
@@ -60,6 +60,7 @@ exports.getCountryPolygon = (req, res) => {
 };
 
 
+// reverse geocoding request to OpenStreetMap server
 exports.nominatimReverseGeocode = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: 'Content cannot be empty!' });
