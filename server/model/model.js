@@ -6,7 +6,7 @@ var schema = new mongoose.Schema({
         required: true
     },
     polygon: {
-        type: array,
+        type: Array,
         required: true,
         unique: true
     },
