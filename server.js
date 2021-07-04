@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 const connectDB = require('./server/database/connection');
@@ -17,10 +17,11 @@ app.use(morgan('tiny'));
 // mongodb connection
 connectDB();
 
-// parse requests to body-parser ()
-// ! BodyParse is built into Express js
-// app.use(express.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+// Set the body size limit to 10 MB
+app.use(express.urlencoded({
+    extended: true,
+    limit: '10mb'
+}));
 
 // set view engine
 app.set('view engine', 'ejs');
@@ -34,6 +35,6 @@ app.use('/js', express.static(path.resolve(__dirname, 'assets/js')));
 // load routes
 app.use('/', require('./server/routes/router'));
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
