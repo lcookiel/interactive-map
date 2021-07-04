@@ -1,6 +1,33 @@
 const axios = require('axios');
 
 
+exports.createPolygon = (req, res) => {
+    // if request is empty
+    if (!req.body) {
+        res.status(400).send({ message: 'Content cannot be empty!' });
+        return;
+    }
+
+    // new polygon entry
+    const polygon = new countryPolygons({
+        countryName: req.body.country,
+        polygon: req.body.polygon
+    })
+
+    // save entry to database
+    polygon
+        .save(polygon)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || 'An unknown error occurred while creating a polygon in the database.'
+            });
+        });
+};
+
+
 exports.nominatimReverseGeocode = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: 'Content cannot be empty!' });
