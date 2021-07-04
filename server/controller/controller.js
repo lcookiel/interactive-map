@@ -1,6 +1,9 @@
 const axios = require('axios');
 
+var countryPolygons = require('../model/model');
 
+
+// create and save new entry with country polygon in DB
 exports.createPolygon = (req, res) => {
     // if request is empty
     if (!req.body) {
