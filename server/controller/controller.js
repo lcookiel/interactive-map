@@ -31,6 +31,35 @@ exports.createPolygon = (req, res) => {
 };
 
 
+// TODO: retrieve country polygon given name; req = country name
+exports.getCountryPolygon = (req, res) => {
+    // if request is empty
+    if (!req.body) {
+        res.status(400).send({ message: 'Content cannot be empty!' });
+        return;
+    }
+
+    // TO-DO: MongoDB request (countryname -> polygon)
+    if (req.query.countryName) {
+        const countryName = req.query.countryName;
+
+        countryPolygons.find({ country: countryName })
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({ message: `Country "${countryName}" is not found.` });
+                } else {
+                    res.send(data);
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || 'An unknown error occurred while retrieving country polygon.'
+                })
+            });
+    }
+};
+
+
 exports.nominatimReverseGeocode = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: 'Content cannot be empty!' });
