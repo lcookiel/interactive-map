@@ -74,7 +74,7 @@ exports.updatePolygon = (req, res) => {
     countryPolygons.findOneAndUpdate({ countryName: country }, req.body)
         .then(data => {
             if (!data) {
-                res.status(404).send({ message: err.message || `Cannot update "${country}" polygon.` });
+                res.status(404).send({ message: `Cannot update "${country}" polygon.` });
             } else {
                 res.send(data);
             }
