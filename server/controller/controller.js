@@ -32,7 +32,7 @@ exports.createPolygon = (req, res) => {
 
 
 // retrieve country polygon given name / retrieve and return all polygons in DB if country is not specified
-exports.getCountryPolygon = (req, res) => {
+exports.getPolygon = (req, res) => {
 
     if (req.body.country) {
         const country = req.body.country;
