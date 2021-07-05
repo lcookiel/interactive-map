@@ -17,6 +17,6 @@ route.get('/', services.homeRoutes);
 route.post('/api/nominatim', controller.nominatimReverseGeocode);
 route.post('/api/createPolygon', controller.createPolygon);
 route.get('/api/getPolygon', controller.getCountryPolygon);
-
+route.put('/api/updatePolygon', controller.updatePolygon);
 
 module.exports = route;
