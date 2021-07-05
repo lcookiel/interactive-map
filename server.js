@@ -22,6 +22,11 @@ app.use(express.urlencoded({
     limit: '10mb'
 }));
 
+app.use(express.json({
+    extended: true,
+    limit: '10mb'
+}));
+
 // set view engine
 app.set('view engine', 'ejs');
 // app.set('views', path.resolve(__dirname, 'views/ejs'));
