@@ -85,6 +85,28 @@ exports.updatePolygon = (req, res) => {
 };
 
 
+// delete country polygon given name
+exports.deletePolygon = (req, res) => {
+    const country = req.body.country;
+
+    countryPolygons.findOneAndDelete({ countryName: country })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: `Couldn't delete polygon "${country}"` })
+            } else {
+                res.send({
+                    message: `Polygon "${country}" was deleted successfully.`
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || `Couldn't delete polygon "${country}"`
+            });
+        });
+}
+
+
 // reverse geocoding request to OpenStreetMap server
 exports.nominatimReverseGeocode = (req, res) => {
     if (!req.body) {
