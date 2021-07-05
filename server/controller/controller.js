@@ -15,7 +15,7 @@ exports.createPolygon = (req, res) => {
     const polygon = new countryPolygons({
         countryName: req.body.country,
         polygon: req.body.polygon
-    })
+    });
 
     // save entry to database
     polygon
@@ -60,6 +60,29 @@ exports.getCountryPolygon = (req, res) => {
     }
 
 }
+
+
+// Update a polygon in database by country name
+exports.updatePolygon = (req, res) => {
+    if (!req.body) {
+        return res
+            .status(400)
+            .send({ message: "Data to update cannot be empty" });
+    }
+
+    const country = req.body.country;
+    countryPolygons.findOneAndUpdate({ countryName: country }, req.body)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: err.message || `Cannot update "${country}" polygon.` });
+            } else {
+                res.send(data);
+            }
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message || "Error updating polygon" });
+        });
+};
 
 
 // reverse geocoding request to OpenStreetMap server
