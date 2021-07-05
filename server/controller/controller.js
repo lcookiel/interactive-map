@@ -31,33 +31,35 @@ exports.createPolygon = (req, res) => {
 };
 
 
-// TODO: retrieve country polygon given name; req = country name
+// retrieve country polygon given name / retrieve and return all polygons in DB if country is not specified
 exports.getCountryPolygon = (req, res) => {
-    // if request is empty
-    if (!req.body) {
-        res.status(400).send({ message: 'Content cannot be empty!' });
-        return;
-    }
 
-    // TODO: MongoDB request (countryname -> polygon)
-    if (req.query.countryName) {
-        const countryName = req.query.countryName;
+    if (req.body.country) {
+        const country = req.body.country;
 
-        countryPolygons.find({ country: countryName })
+        countryPolygons.findOne({ countryName: country })
             .then(data => {
                 if (!data) {
-                    res.status(404).send({ message: `Country "${countryName}" is not found.` });
+                    res.status(404).send({ message: `Country "${country}" is not found.` })
                 } else {
-                    res.send(data);
+                    res.send(data)
                 }
             })
             .catch(err => {
-                res.status(500).send({
-                    message: err.message || 'An unknown error occurred while retrieving country polygon.'
-                })
-            });
+                res.status(500).send({ message: err.message || `Error occured while retrieving "${country}" polygon.` })
+            })
+
+    } else {
+        countryPolygons.find()
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({ message: err.message || "Error Occurred while retriving polygon." })
+            })
     }
-};
+
+}
 
 
 // reverse geocoding request to OpenStreetMap server
